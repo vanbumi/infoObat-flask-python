@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -14,3 +14,10 @@ def about():
 @app.route('/addobat')
 def quotes():
     return render_template('infobat.html')
+
+@app.route('/process', methods=['POST'])
+def process():
+    namaobat = request.form('namaobat')
+    description = request.form('description')
+    
+    return redirect(url_for('index.html'))
