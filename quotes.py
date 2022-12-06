@@ -1,6 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:password@localhost/obat'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Favobat(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nama = db.Column(db.String(30))
+    description = db.Column(db.String(2000))
 
 @app.route('/')
 def index():
