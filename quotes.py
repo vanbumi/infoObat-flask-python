@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+
+    with app.app_context():
+        init_db()
+
+    return app
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:password@localhost/obat'
 
